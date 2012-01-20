@@ -3,7 +3,7 @@
 */
 DROP TABLE if EXISTS 
     Response, Data_Feedback, FeedbackVote,
-    DataRank, FeedbackTag, FeedbackUser,
+    DataRank, DataTag, FeedbackUser,
     FeedbackAnon,
     Feedback, Data, UserOH, FeedbackCat, DataCat;
 
@@ -103,12 +103,13 @@ CREATE TABLE DataRank
             ON DELETE CASCADE
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE FeedbackTag
+/* implementing this table is optional */
+CREATE TABLE DataTag
 (
-    FK_Feedback_ID int unsigned,
+    FK_Data_ID smallint unsigned,
     tags varchar(100),
-    PRIMARY KEY (FK_Feedback_ID),
-    FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID)
+    PRIMARY KEY (FK_Data_ID),
+    FOREIGN KEY (FK_Data_ID) REFERENCES Data(ID)
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE FeedbackUser
@@ -182,11 +183,6 @@ INSERT INTO Data
         (3, 'Election Results', 1),
         (4, 'Useless Dataset', 1);
                 
-/* test update cascade */
-UPDATE FeedbackCat
-    SET ID=99
-    WHERE ID=1;
-
 /* insert Data_Feedback relationships */
 INSERT INTO Data_Feedback
         (FK_Feedback_ID, FK_Data_ID)
@@ -194,10 +190,6 @@ INSERT INTO Data_Feedback
         (8, 1),
         (7, 3),
         (9, 4);
-
-/* test delete cascade */
-DELETE FROM Data
-    WHERE ID=4;
 
 /* insert Response relationships */
 INSERT INTO Response
@@ -207,19 +199,54 @@ INSERT INTO Response
         (4, 2),
         (5, 2);
         
-/* insert FeedbackVote relationships */
+/* insert FeedbackVote relationships (vote -1 or 1) */
 INSERT INTO FeedbackVote
         (FK_UserOH_ID, FK_Feedback_ID, vote)
     VALUES
-        (1, 1),
-        (1, 4),
-        (3, 7),
-        (3, 8);
+        (1, 1, -1),
+        (1, 4, 1),
+        (3, 7, 1),
+        (3, 8, 1);
 
-/* insert DataRank relationships */
+/* insert DataRank relationships (rank from 1 to 4)*/
+INSERT INTO DataRank
+        (FK_UserOH_ID, FK_Data_ID, rank)
+    VALUES
+        (3, 1, 4),
+        (4, 1, 4),
+        (5, 1, 3),
+        (6, 2, 2),
+        (3, 2, 4),
+        (4, 2, 3),
+        (5, 2, 2),
+        (5, 3, 3),
+        (6, 3, 1);
 
 /* insert FeedbackTag relationships */
-
+INSERT INTO DataTag
+        (FK_Data_ID, tags)
+    VALUES
+        (1, 'Transit, HSR'),
+        (2, 'Pools, Swimming, Summer'),
+        (3, 'Politics');
+        
 /* insert FeedbackUser relationships */
+INSERT INTO FeedbackUser
+        (FK_Feedback_ID, FK_UserOH_ID)
+    VALUES
+        (1, 3),
+        (4, 2),
+        (7, 1);
 
 /* insert FeedbackAnon relationships */
+INSERT INTO FeedbackAnon
+        (FK_Feedback_ID, screen_name)
+    VALUES
+        (2, ''),
+        (3, 'Smith44'),
+        (5, 'SpruceWillis'),
+        (6, 'Tom_Cruise00'),
+        (8, ''),
+        (9, 'daisy34');
+        
+
