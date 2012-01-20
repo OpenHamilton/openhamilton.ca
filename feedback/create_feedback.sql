@@ -27,7 +27,9 @@ CREATE TABLE Data
     name varchar(100) NOT NULL,
     FK_DataCat_ID tinyint unsigned,
     PRIMARY KEY (ID),
-    FOREIGN KEY (FK_DataCat_ID) REFERENCES DataCat(ID)
+    FOREIGN KEY (FK_DataCat_ID) 
+        REFERENCES DataCat(ID)
+            ON UPDATE CASCADE
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE UserOH
@@ -48,7 +50,9 @@ CREATE TABLE Feedback
     spam_rank tinyint,
     published boolean NOT NULL,
     PRIMARY KEY (ID),
-    FOREIGN KEY (FK_FeedbackCat_ID) REFERENCES FeedbackCat(ID)
+    FOREIGN KEY (FK_FeedbackCat_ID) 
+        REFERENCES FeedbackCat(ID)
+            ON UPDATE CASCADE
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Response
@@ -66,7 +70,10 @@ CREATE TABLE Data_Feedback
     FK_Data_ID smallint unsigned NOT NULL,
     PRIMARY KEY (FK_Feedback_ID),
     FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID),
-    FOREIGN KEY (FK_Data_ID) REFERENCES Data(ID)
+    FOREIGN KEY (FK_Data_ID) 
+        REFERENCES Data(ID)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE FeedbackVote
@@ -75,7 +82,9 @@ CREATE TABLE FeedbackVote
     FK_Feedback_ID int unsigned NOT NULL,
     vote tinyint,
     PRIMARY KEY (FK_UserOH_ID, FK_Feedback_ID),
-    FOREIGN KEY (FK_UserOH_ID) REFERENCES UserOH(ID),
+    FOREIGN KEY (FK_UserOH_ID) 
+        REFERENCES UserOH(ID)
+            ON DELETE CASCADE,
     FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID)
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
@@ -85,6 +94,132 @@ CREATE TABLE DataRank
     FK_Data_ID smallint unsigned NOT NULL,
     rank tinyint,
     PRIMARY KEY (FK_UserOH_ID, FK_Data_ID),
-    FOREIGN KEY (FK_UserOH_ID) REFERENCES UserOH(ID),
-    FOREIGN KEY (FK_Data_ID) REFERENCES Data(ID)
+    FOREIGN KEY (FK_UserOH_ID) 
+        REFERENCES UserOH(ID)
+            ON DELETE CASCADE,
+    FOREIGN KEY (FK_Data_ID) 
+        REFERENCES Data(ID)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE FeedbackTag
+(
+    FK_Feedback_ID int unsigned,
+    tags varchar(100),
+    PRIMARY KEY (FK_Feedback_ID),
+    FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID)
+) ENGINE InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE FeedbackUser
+(
+    FK_Feedback_ID int unsigned,
+    FK_UserOH_ID int unsigned,
+    PRIMARY KEY (FK_Feedback_ID),
+    FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID),
+    FOREIGN KEY (FK_UserOH_ID) 
+        REFERENCES UserOH(ID)
+            ON DELETE CASCADE
+) ENGINE InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE FeedbackAnon
+(
+    FK_Feedback_ID int unsigned,
+    screen_name varchar(30),
+    PRIMARY KEY (FK_Feedback_ID),
+    FOREIGN KEY (FK_Feedback_ID) REFERENCES Feedback(ID)
+) ENGINE InnoDB DEFAULT CHARSET=utf8;
+
+
+/* insert default categories */
+INSERT INTO FeedbackCat (ID, category) 
+    VALUES (1, 'General Feedback'), (2, 'Question'),
+            (3, 'Response'), (4, 'Dataset Request'),
+            (5, 'Dataset Feedback'), (6, 'App Request'),
+            (7, 'App Feedback');
+            
+INSERT INTO DataCat (ID, category)
+    VALUES (1, 'Dataset'), (2, 'App');
+
+
+/*
+    This section consists of fake data for testing
+    purposes.
+    NOTE: This can be removed after testing
+*/
+
+/* insert fake users */
+INSERT INTO UserOH 
+        (email, pass, screen_name)
+    VALUES 
+        ('user1@gmail.com', 'user1', 'user1'),
+        ('user2@gmail.com', 'user2', 'user2'),
+        ('user3@gmail.com', 'user3', 'user3'),
+        ('user4@gmail.com', 'user4', 'user4'),
+        ('user5@gmail.com', 'user5', 'user5'),
+        ('user6@gmail.com', 'user6', 'user6');
+
+/* insert fake feedback */
+INSERT INTO Feedback 
+        (FK_FeedbackCat_ID, message, submit_time, spam_rank, published)
+    VALUES
+        (1, 'test1', NOW(), -2, 1),
+        (2, 'response1 to test1', NOW(), -2, 1),
+        (1, 'test2', NOW(), -2, 1),
+        (2, 'response1 to response1 to test1', NOW(), -2, 1),
+        (2, 'response2 to response1 to test1', NOW(), -2, 1),
+        (1, 'test3', NOW(), -1, 0),
+        (5, 'dataset1 feedback', NOW(), -2, 1),
+        (7, 'app1 feedback', NOW(), -2, 1),
+        (5, 'dataset2 feedback', NOW(), -2, 1);
+
+/* insert fake dataset and app names */
+INSERT INTO Data
+        (ID, name, FK_DataCat_ID)
+    VALUES
+        (1, 'HammerBusSMS', 2),
+        (2, 'Dowsing', 2),
+        (3, 'Election Results', 1),
+        (4, 'Useless Dataset', 1);
+                
+/* test update cascade */
+UPDATE FeedbackCat
+    SET ID=99
+    WHERE ID=1;
+
+/* insert Data_Feedback relationships */
+INSERT INTO Data_Feedback
+        (FK_Feedback_ID, FK_Data_ID)
+    VALUES
+        (8, 1),
+        (7, 3),
+        (9, 4);
+
+/* test delete cascade */
+DELETE FROM Data
+    WHERE ID=4;
+
+/* insert Response relationships */
+INSERT INTO Response
+        (FK_Feedback_ID_R, FK_Feedback_ID)
+    VALUES
+        (2, 1),
+        (4, 2),
+        (5, 2);
+        
+/* insert FeedbackVote relationships */
+INSERT INTO FeedbackVote
+        (FK_UserOH_ID, FK_Feedback_ID, vote)
+    VALUES
+        (1, 1),
+        (1, 4),
+        (3, 7),
+        (3, 8);
+
+/* insert DataRank relationships */
+
+/* insert FeedbackTag relationships */
+
+/* insert FeedbackUser relationships */
+
+/* insert FeedbackAnon relationships */
