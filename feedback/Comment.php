@@ -7,7 +7,7 @@ class Comment extends Feedback
 {
     function __construct()
     {
-        $this->FK_FeedbackCat_ID = 1;
+        $this->category = 1;
     }
 }
 ?>

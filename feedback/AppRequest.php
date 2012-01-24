@@ -7,7 +7,7 @@ class AppRequest extends Feedback
 {
     function __construct()
     {
-        $this->FK_FeedbackCat_ID = 6;
+        $this->category = 6;
     }
 }
 ?>

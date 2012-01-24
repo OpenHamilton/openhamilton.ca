@@ -7,7 +7,7 @@ class Question extends Feedback
 {
     function __construct()
     {
-        $this->FK_FeedbackCat_ID = 2;
+        $this->category = 2;
     }
 }
 ?>

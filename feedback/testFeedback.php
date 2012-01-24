@@ -50,8 +50,10 @@ $recentFeedback = getAppRequests();
 echo 'Here is some of the latest feedback left by the general public: <br /><br />';
 foreach($recentFeedback as $fb)
         {
+            // check if string is empty or null and add Anonymous.
             echo    $fb->ID.'<br />'.
-                    $fb->FK_FeedbackCat_ID.'<br />'.
+                    $fb->category.'<br />'.
+                    $fb->screen_name.'<br />'.
                     $fb->message.'<br />'.
                     $fb->submit_time.'<br /><br />';
         }

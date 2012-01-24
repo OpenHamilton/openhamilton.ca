@@ -8,11 +8,12 @@
 class Feedback
 {
     protected $ID;
-    protected $FK_FeedbackCat_ID;
+    protected $category;
     protected $message;
     protected $submit_time;
     protected $spam_rank;
     protected $published;
+    protected $screen_name;
     
     function __construct(){}
     
@@ -43,8 +44,12 @@ class Feedback
         if ($myclass == "Feedback")
         {
             $sth = $pdo->prepare("
-                SELECT * FROM Feedback
+                SELECT f.ID, f.FK_FeedbackCat_ID as category, 
+                    f.message, f.submit_time, f.spam_rank, 
+                    f.published, fa.screen_name 
+                FROM Feedback as f, FeedbackAnon as fa
                 WHERE published=true
+                AND f.ID=fa.FK_Feedback_ID
                     ORDER BY submit_time DESC
                     LIMIT 40
             ");
@@ -54,16 +59,20 @@ class Feedback
         else // use category if not general feedback
         {
             $sth = $pdo->prepare("
-                SELECT * FROM Feedback
+                SELECT f.ID, f.FK_FeedbackCat_ID as category, 
+                    f.message, f.submit_time, f.spam_rank, 
+                    f.published, fa.screen_name 
+                FROM Feedback as f, FeedbackAnon as fa
                 WHERE published=true
                 AND FK_FeedbackCat_ID=:category
+                AND f.ID=fa.FK_Feedback_ID
                     ORDER BY submit_time DESC
                     LIMIT 40
             ");
             
             // Execute SQL query, bind parameter as we go.
             $sth->execute(array(
-                ':category' => $this->FK_FeedbackCat_ID,
+                ':category' => $this->category,
             ));
         }
         // Comment class variables must reflect Table column names or a
@@ -97,7 +106,7 @@ class Feedback
 
         // Execute SQL query, bind parameter as we go.
         $sth->execute(array(
-            ':category' => $this->FK_FeedbackCat_ID,
+            ':category' => $this->category,
             ':message' => $this->message,
             ':spamrank' => $this->spam_rank,
             ':published' => $this->published,

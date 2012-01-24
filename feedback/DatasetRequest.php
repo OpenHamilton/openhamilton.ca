@@ -7,7 +7,7 @@ class DatasetRequest extends Feedback
 {
     function __construct()
     {
-        $this->FK_FeedbackCat_ID = 4;
+        $this->category = 4;
     }
 }
 ?>
