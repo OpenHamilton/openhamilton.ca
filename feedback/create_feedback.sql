@@ -134,7 +134,7 @@ CREATE TABLE FeedbackAnon
 
 /* insert default categories */
 INSERT INTO FeedbackCat (ID, category) 
-    VALUES (1, 'General Feedback'), (2, 'Question'),
+    VALUES (1, 'Comment'), (2, 'Question'),
             (3, 'Response'), (4, 'Dataset Request'),
             (5, 'Dataset Feedback'), (6, 'App Request'),
             (7, 'App Feedback');
@@ -164,15 +164,17 @@ INSERT INTO UserOH
 INSERT INTO Feedback 
         (FK_FeedbackCat_ID, message, submit_time, spam_rank, published)
     VALUES
-        (1, 'test1', NOW(), -2, 1),
-        (2, 'response1 to test1', NOW(), -2, 1),
-        (1, 'test2', NOW(), -2, 1),
-        (2, 'response1 to response1 to test1', NOW(), -2, 1),
-        (2, 'response2 to response1 to test1', NOW(), -2, 1),
-        (1, 'test3', NOW(), -1, 0),
+        (1, 'comment1', NOW(), -2, 1),
+        (3, 'response1 to comment1', NOW(), -2, 1),
+        (2, 'question1', NOW(), -2, 1),
+        (3, 'response1 to response1 to comment1', NOW(), -2, 1),
+        (3, 'response2 to response1 to comment1', NOW(), -2, 1),
+        (1, 'comment2', NOW(), -1, 0),
         (5, 'dataset1 feedback', NOW(), -2, 1),
         (7, 'app1 feedback', NOW(), -2, 1),
-        (5, 'dataset2 feedback', NOW(), -2, 1);
+        (5, 'dataset2 feedback', NOW(), -2, 1),
+        (4, 'dataset request1', NOW(), -2, 1),
+        (6, 'app request1', NOW(), -2, 1);
 
 /* insert fake dataset and app names */
 INSERT INTO Data
