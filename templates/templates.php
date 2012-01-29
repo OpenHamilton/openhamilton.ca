@@ -38,7 +38,7 @@ class Template {
 class MainPage extends Template {
     
     public function MainPage($data) {
-        parent::Template("./templates/main.html", $data);
+        parent::Template( __DIR__ . DIRECTORY_SEPARATOR . "/main.html", $data);
     }
     
 }
@@ -46,7 +46,7 @@ class MainPage extends Template {
 class DetailsPage extends Template {
     
     public function DetailsPage($data) {
-        parent::Template("./templates/details.html", $data);
+        parent::Template( __DIR__ . DIRECTORY_SEPARATOR . "/details.html", $data);
     }
     
 }

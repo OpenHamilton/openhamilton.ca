@@ -1,6 +1,6 @@
 <?php
 
-include('.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'templates.php');
+include('..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'templates.php');
 
 $builder = new TextBuilders();
 
