@@ -7,34 +7,22 @@ $builder = new TextBuilders();
 
 $infoPanel = "";
 $infoPanel .= $builder->standardBlock(
-    "What is OpenHamilton?",
-    "We're a fast-growing group of Hamilton citizens who want to make life for everyone better through Open Data."
+    "Data Portal",
+    "This area of the site is dedicated to Hamilton related Open Data sets."
 );
-
-$infoPanel .= $builder->standardBlock(
-    "What is OpenData?",
-    "Open data is the idea that certain data should be freely available to everyone to use and republish as they wish, without restrictions from copyright, patents or other mechanisms of control."
-);
-
 
 $dataPanels = "";
-$dataPanels .= $builder->standardDivBlock(
-    "Apps",
-    "Check out cool things we can do with open data."
+$dataPanels .= $builder->standardAnchorDivBlock(
+    "GTFS",
+    "Google Transit Feed scraper for Hamilton Street Rail.",
+    "https://github.com/Jasindros/Hamilton-Open-Data"
 );
+/*
 $dataPanels .= $builder->standardDivBlock(
-    "Data",
-    "Look at data, suggest new data, submit data."
+    "Placeholder",
+    "More data sets will be accessable shortly."
 );
-$dataPanels .= $builder->standardDivBlock(
-    "Feedback",
-    "Tell us what you think."
-);
-$dataPanels .= $builder->standardDivBlock(
-    "Support",
-    "Help spread Open Data."
-);
-
+*/
 
 $page = new MainPage(array(
     "{PageTitle}"  => "Home | Open Hamilton",

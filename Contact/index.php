@@ -6,37 +6,34 @@ $builder = new TextBuilders();
 
 
 $infoPanel = "";
-$infoPanel .= $builder->standardBlock(
-    "What is OpenHamilton?",
-    "We're a fast-growing group of Hamilton citizens who want to make life for everyone better through Open Data."
-);
+$infoPanel .= "
+                <h2>Follow us on twitter</h2>
+                <p>Stay up to date with our latest breaking tweets.
+                <br/>
 
-$infoPanel .= $builder->standardBlock(
-    "What is OpenData?",
-    "Open data is the idea that certain data should be freely available to everyone to use and republish as they wish, without restrictions from copyright, patents or other mechanisms of control."
-);
 
+<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-url=\"http://openhamilton.ca/\" data-text=\"We need open data!\" data-via=\"OpenHamilton\" data-hashtags=\"OpenData\">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>
+
+                </p>
+                <h2>Help out on GitHub</h2>
+                <p><a href=\"\">Look at our source code, contribute to the project, or build your own killer app.
+                <br/><img src=\"/img/github.png\"></a>
+                </p>
+                <h2>Find our discussion board</h2>
+                <p><a href=\"http://groups.google.com/group/openhamilton\">Much of our planning and meeting notes are found at Google Groups.
+                <br/><img src=\"/img/googlegroups.gif\"></a>
+                </p>
+";
 
 $dataPanels = "";
 $dataPanels .= $builder->standardDivBlock(
-    "Apps",
-    "Check out cool things we can do with open data."
-);
-$dataPanels .= $builder->standardDivBlock(
-    "Data",
-    "Look at data, suggest new data, submit data."
-);
-$dataPanels .= $builder->standardDivBlock(
-    "Feedback",
-    "Tell us what you think."
-);
-$dataPanels .= $builder->standardDivBlock(
-    "Support",
-    "Help spread Open Data."
+    "Comments",
+    "Coming soon: Have your say, right here."
 );
 
 
-$page = new MainPage(array(
+$page = new DetailsPage(array(
     "{PageTitle}"  => "Home | Open Hamilton",
     "{InfoPanel}"  => $infoPanel,
     "{DataPanels}" => $dataPanels

@@ -7,27 +7,31 @@ $builder = new TextBuilders();
 
 $infoPanel = "";
 $infoPanel .= $builder->standardBlock(
-    "What is OpenHamilton?",
-    "We're a fast-growing group of Hamilton citizens who want to make life for everyone better through Open Data."
+    "Apps built on OpenData",
+    "Apps built with Hamilton based Open Data sets."
 );
 
 
 $dataPanels = "";
-$dataPanels .= $builder->standardDivBlock(
+$dataPanels .= $builder->standardAnchorDivBlock(
+    "Skate Hamilton",
+    "Find  a place to go ice skate in Hamilton.",
+    "/Apps/SkateHamilton"
+);
+$dataPanels .= $builder->standardAnchorDivBlock(
+    "HammerSMS",
+    "Bus schedules via Text message to your cellphone, not just for smartphones.",
+    "/Apps/HammerSMS"
+);
+$dataPanels .= $builder->standardAnchorDivBlock(
     "Dowsing",
-    "Find local simming places on a map."
+    "Find local simming spots in Hamilton.",
+    "/Apps/Dowsing"
 );
-$dataPanels .= $builder->standardDivBlock(
+$dataPanels .= $builder->standardAnchorDivBlock(
     "Dowsing Mobile",
-    "Dowsing on the go"
-);
-$dataPanels .= $builder->standardDivBlock(
-    "Skate",
-    "Find  a place to skate"
-);
-$dataPanels .= $builder->standardDivBlock(
-    "RepFinder",
-    "Who's your rep?"
+    "Find swimming spots from your smartphone.",
+    "/Apps/DowsingMobile"
 );
 
 
