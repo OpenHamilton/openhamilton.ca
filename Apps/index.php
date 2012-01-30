@@ -11,7 +11,6 @@ $infoPanel .= $builder->standardBlock(
     "Apps built with Hamilton based Open Data sets."
 );
 
-
 $dataPanels = "";
 $dataPanels .= $builder->standardAnchorDivBlock(
     "Skate Hamilton",
