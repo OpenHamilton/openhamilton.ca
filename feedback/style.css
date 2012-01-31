@@ -1,0 +1,41 @@
+/* Feedback display CSS */
+.feedback_container
+{
+    width: 455px;
+    height: 100%;
+    overflow: auto;
+}
+.feedback
+{
+    background-color: #f7f7f7;
+    border: 1px solid #cccccc;
+    width: 400px;
+    padding: 10px;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+}
+.feedback:hover 
+{
+    background-color: #ffffff;
+}
+.feedback p
+{
+    margin: 0;
+}
+.feedback span.author
+{
+    font-weight: bold;
+}
+.feedback span.time
+{
+    color: #006600;    
+}
+
+/* for testing purpose delete after (represents comment section) */
+.fixed_box
+{
+    width: 500px;
+    height: 300px;
+}
+
