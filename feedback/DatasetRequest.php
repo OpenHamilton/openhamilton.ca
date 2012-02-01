@@ -7,7 +7,7 @@ class DatasetRequest extends Feedback
 {
     function __construct()
     {
-        $this->category = 4;
+        $this->category = 3;
     }
 }
 ?>

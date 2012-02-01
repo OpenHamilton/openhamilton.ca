@@ -7,7 +7,7 @@ class AppRequest extends Feedback
 {
     function __construct()
     {
-        $this->category = 6;
+        $this->category = 4;
     }
 }
 ?>

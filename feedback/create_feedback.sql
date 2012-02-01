@@ -135,9 +135,8 @@ CREATE TABLE FeedbackAnon
 /* insert default categories */
 INSERT INTO FeedbackCat (ID, category) 
     VALUES (1, 'Comment'), (2, 'Question'),
-            (3, 'Response'), (4, 'Dataset Request'),
-            (5, 'Dataset Feedback'), (6, 'App Request'),
-            (7, 'App Feedback');
+            (3, 'Dataset Request'), (4, 'App Request'), 
+            (5, 'Dataset Feedback'), (6, 'App Feedback');
             
 INSERT INTO DataCat (ID, category)
     VALUES (1, 'Dataset'), (2, 'App');
@@ -165,16 +164,18 @@ INSERT INTO Feedback
         (FK_FeedbackCat_ID, message, submit_time, spam_rank, published)
     VALUES
         (1, 'comment1', NOW(), -2, 1),
-        (3, 'response1 to comment1', NOW(), -2, 1),
+        (1, 'response1 to comment1', NOW(), -2, 1),
         (2, 'question1', NOW(), -2, 1),
-        (3, 'response1 to response1 to comment1', NOW(), -2, 1),
-        (3, 'response2 to response1 to comment1', NOW(), -2, 1),
+        (1, 'response1 to response1 to comment1', NOW(), -2, 1),
+        (1, 'response2 to response1 to comment1', NOW(), -2, 1),
         (1, 'comment2', NOW(), -1, 0),
         (5, 'dataset1 feedback', NOW(), -2, 1),
-        (7, 'app1 feedback', NOW(), -2, 1),
+        (6, 'app1 feedback', NOW(), -2, 1),
         (5, 'dataset2 feedback', NOW(), -2, 1),
-        (4, 'dataset request1', NOW(), -2, 1),
-        (6, 'app request1', NOW(), -2, 1);
+        (3, 'dataset request1', NOW(), -2, 1),
+        (4, 'app request1', NOW(), -2, 1),
+        (1, 'response1 to response2 to response1 to comment1', NOW(), -2, 1),
+        (3, 'response to dataset request1', NOW(), -2, 1);
 
 /* insert fake dataset and app names */
 INSERT INTO Data
@@ -199,7 +200,9 @@ INSERT INTO Response
     VALUES
         (2, 1),
         (4, 2),
-        (5, 2);
+        (5, 2),
+        (12, 5),
+        (13, 10);
         
 /* insert FeedbackVote relationships (vote -1 or 1) */
 INSERT INTO FeedbackVote
@@ -249,6 +252,10 @@ INSERT INTO FeedbackAnon
         (5, 'SpruceWillis'),
         (6, 'Tom_Cruise00'),
         (8, ''),
-        (9, 'daisy34');
+        (9, 'daisy34'),
+        (10, 'john1'),
+        (11, 'john2'),
+        (12, 'ray13'),
+        (13, 'simon');
         
 

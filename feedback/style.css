@@ -1,4 +1,41 @@
 /* Feedback display CSS */
+.actual_space
+{
+    width: 530px;
+    height: 550px;
+    /* font-family: small-caption,arial sans-serif; */
+    font-size: 0.9em;
+}
+.actual_space span.label_tips
+{
+    color: #666666;
+}
+.actual_space span.error
+{
+    color: #ff0000;
+}
+.actual_space input.styled_button
+{
+    border: 1px solid #888888;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    margin: 3px;
+    padding: 2px;
+    background-color: #3366ff;
+    color: #ffffff;
+}
+.actual_space input.styled_button:hover
+{
+    cursor: pointer;
+    background-color: #4775ff;
+}
+#submit_options
+{
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+}
 .feedback_container
 {
     width: 455px;
