@@ -1,6 +1,8 @@
 <?php
 
 include('..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'templates.php');
+include('..' . DIRECTORY_SEPARATOR . 'feedback' . DIRECTORY_SEPARATOR . 'easyFeedback.php');
+include_once('..' . DIRECTORY_SEPARATOR . 'feedback' . DIRECTORY_SEPARATOR . 'sblamtest.php');
 
 $builder = new TextBuilders();
 
