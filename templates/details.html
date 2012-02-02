@@ -7,12 +7,12 @@
     <meta name="author" content="Open Hamilton Members">
     <meta name="viewport" content="width=900,initial-scale=1">
     <link rel="shortcut icon" href="favicon.ico"> 
-
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <style>
-        
-        
-        
+        .content .right div {
+            width:  530px;
+            min-height: 510px;
+        }
     </style>
   </head>
   <body>
@@ -23,6 +23,7 @@
         <div class="nav">
           <hr/>
           <a href="/">Home</a>
+          <a href="http://blog.openhamilton.ca">News</a>
           <a href="/Data">View Data</a>
           <a href="/Apps">Apps</a>
           <a href="/Contact">Contact us</a>
@@ -33,10 +34,7 @@
                 {InfoPanel}
             </div>
             <div class="right">
-                <div>
-                  <h2>Data</h2>
-                  <p>Image for data.</p>
-                </div>
+                {DataPanels}
             </div>
         </div>
         <div class="clear">&nbsp;</div>

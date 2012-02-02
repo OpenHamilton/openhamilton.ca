@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>Dowsing</title>
+		<link rel="shortcut icon" href="images/icon.png" />
+
+		<link rel="stylesheet" href="app.css" type="text/css" media="all" />
+
+		<script src="zepto.js"></script>
+		<script src="libs.js"></script>
+
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&region=CA"></script>
+	</head>
+
+	<body>
+		<div id="content">
+			<div style="margin:40px auto;width:40px;"><img src="images/loading.gif" /></div>
+		</div>
+
+		<div id="footer">A project of <a href="http://www.openhamilton.ca/">OpenHamilton</a>.  All Rights Reserved.&nbsp;&copy;&nbsp;Copyright OpenHamilton 2011.</div>
+
+		<script src="app.js"></script>
+		<script type="text/javascript">$(function(){Dowsing.init();});</script>
+
+		<!-- Templates -->
+		<script id="header-template" type="text/x-handlebars-template">
+			<div id="header">
+				<ul>
+					<li class="x-84 left">
+						<a href="index.html" class="left" id="home">
+							<div class="sprite sprite-icon"></div>
+						</a>
+						<div id="next">
+							<h1>{{title}}</h1>
+						</div>
+					</li>
+					<li class="last right">
+						<a href="info.html" class="right" id="info">
+							<div class="sprite sprite-info"></div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</script>
+
+		<script id="home-template" type="text/x-handlebars-template">
+			{{> header}}
+			<div id="main" class="index">
+				<h2>Find A Water Spot</h2>
+				<form>
+					<input type="text" size="25" placeholder="Enter your address" id="address" name="address" class="green" /><br/>
+					<input type="submit" id="find-location-submit" value="Search" class="button green">
+				</form>
+				<br/><p class="home">Dowsing helps you find pools, beaches and splash pads in Hamilton to help you cool off from the summer heat.</p>
+				<br/><br/>
+			</div>
+		</script>
+
+		<script id="info-template" type="text/x-handlebars-template">
+			{{> header}}
+			<div id="main" class="index">
+				<h2>About Dowsing</h2>
+				<p class="info">
+					Dowsing helps you find places to cool off near you in Hamilton.  Dowsing takes its name from the practice of the using two rods to find water underground. (<a href="http://en.wikipedia.org/wiki/Dowsing">Wikipedia</a>).<br/><br/>It is supported by <a href="http://www.openhamilton.ca">Open Hamilton</a>.  You can join our <a href="http://groups.google.com/group/openhamilton">Google Group</a> for the latest Open Hamilton news and to join us in using data for a better Hamilton.<br/><br/>The icons used are from the great <a href="http://mapicons.nicolasmollet.com/">Google Maps Icons</a> set provided by <a href="http://nicolasmollet.com/">Nicolas Mollet</a>.&nbsp;&nbsp;You can find the code for Dowsing on <a href="http://github.com/gsmaverick/dowsing">GitHub</a>.
+				</p>
+			</div>
+		</script>
+
+		<script id="result-template" type="text/x-handlebars-template">
+			{{> header}}
+			<div id="main">
+				<ul id="results">
+					{{#each results}}
+					<li class="result">
+						<div class="icon sprite sprite-{{Icon}}"></div>
+						<div class="panel" tag="{{Lat}}_{{Long}}">
+							<h3>{{Facility_Name}}</h3>
+							<h5><i>{{Type}}</i></h5>
+							<h5>{{Address}}, {{City}}</h5>
+							<div class="disclosure"></div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					{{/each}}
+					<div class="clearfix"></div>
+				</ul>
+				
+				<div class="nav_btns">
+					{{#if prev}}
+						<a href="#" class="button green prev">&laquo;&nbsp;Prev</a>
+					{{/if}}
+					{{#if next}}
+						<a href="#" class="button green next">Next&nbsp;&raquo;</a>
+					{{/if}}
+				</div>
+			</div>
+		</script>
+
+		<script id="detail-template" type="text/x-handlebars-template">
+			{{> header}}
+			<div id="main">
+				<a href="#" class="back" style="display:{{canGoBack}};">&laquo;&nbsp;Back to results</a>
+				{{#with row}}
+				<div class="detail">
+					<h3><div class="icon sprite sprite-{{Icon}}"></div>{{Facility_Name}}</h3>
+					<h5 class="type">{{Type}}</h5>
+					<div class="clearfix"></div>
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><b>Address:</b></td>
+							<td>{{Address}},&nbsp;{{City}}</td>
+						</tr>
+						{{#if Phone}}
+						<tr>
+							<td><b>Phone:</b></td>
+							<td>{{Phone}}</td>
+						</tr>
+						{{/if}}
+						{{#if Website}}
+						<tr>
+							<td><b>Website:</b></td>
+							<td><a href="{{Website}}">{{Facility_Name}}</a></td>
+						</tr>
+						{{/if}}
+						{{#if Email}}
+						<tr>
+							<td><b>Email:</b></td>
+							<td><a href="mailto:{{Email}}">{{Email}}</a></td>
+						</tr>
+						{{/if}}
+						{{#if Hours}}
+						<tr>
+							<td><b>Hours:</b></td>
+							<td>{{Hours}}</td>
+						</tr>
+						{{/if}}
+						{{#if Heat_Wave_Extended_Hours}}
+						<tr>
+							<td><b>Heat Wave Extended Hours:</b></td>
+							<td>{{Heat_Wave_Extended_Hours}}</td>
+						</tr>
+						{{/if}}
+						{{#if Beach_Conditions_Link}}
+						<tr>
+							<td><b>Beach Conditions:</b></td>
+							<td><a href="{{Beach_Conditions_Link}}">{{Beach_Conditions_Link}}</a></td>
+						</tr>
+						{{/if}}
+						<tr><th colspan="2" align="left"><b>Map:</b></th></tr>
+						<tr><th colspan="2">{{{staticMap ..}}}</th></tr>
+					</table>
+				</div>
+				{{/with}}
+			</div>
+		</script>
+	</body>
+</html>

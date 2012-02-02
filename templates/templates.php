@@ -38,7 +38,7 @@ class Template {
 class MainPage extends Template {
     
     public function MainPage($data) {
-        parent::Template("./templates/main.html", $data);
+        parent::Template( __DIR__ . DIRECTORY_SEPARATOR . "main.html", $data);
     }
     
 }
@@ -46,7 +46,7 @@ class MainPage extends Template {
 class DetailsPage extends Template {
     
     public function DetailsPage($data) {
-        parent::Template("./templates/details.html", $data);
+        parent::Template( __DIR__ . DIRECTORY_SEPARATOR . "details.html", $data);
     }
     
 }
@@ -60,6 +60,17 @@ class TextBuilders {
         $output .= "<p>{$paragraph}</p>";
         return $output;
     }
+
+    public function standardAnchorDivBlock($heading, $paragraph, $link){
+        $output = "";
+        $output .= "<div>";
+        $output .= "<a href=\"{$link}\">";
+        $output .= $this->standardBlock($heading, $paragraph);
+        $output .= "</a>";
+        $output .= "</div>";
+        return $output;
+    }
+
     public function standardDivBlock($heading, $paragraph){
         $output = "";
         $output .= "<div>";

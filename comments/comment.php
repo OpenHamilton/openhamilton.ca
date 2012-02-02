@@ -7,10 +7,12 @@ class Comment
 {
     
     private $commentID;
+    private $category;
     private $comment;
-    private $upvotes;
-    private $downvotes;
+    private $votesup;
+    private $votesdown;
     private $submittime;
+    private $published;
 
     function __construct(){}
 
@@ -22,12 +24,12 @@ class Comment
         return $this->comment;
     }
 
-    function getDownvotes(){
-        return $this->downvotes;
+    function getVotesUp(){
+        return $this->votesup;
     }
 
-    function getUpvotes(){
-        return $this->upvotes;
+    function getVotesDown(){
+        return $this->votesdown;
     }
     
     function getSubmittime(){
@@ -35,11 +37,14 @@ class Comment
     }
 
     // Returns bool and takes a string.
-    function submit_Comment($comm) {
+    function submit_Comment($comm, $category, $published = false) {
         // add connection credentials
         include("dbinfo.inc.php");
         // format string
         $this->comment = nl2br($comm);
+        // Make sure category id is correct, if not then classify as general comment
+        $this->category = ($category >= 1 && $category <= 3) ? $category : 1;
+        $this->published = $published;
         // create connection        
         $pdo = new \PDO("mysql:host={$host};dbname={$database}", $username, $password);
         // For error handling
@@ -47,12 +52,14 @@ class Comment
         // Create PDO statement object
         $sth = $pdo->prepare("
             INSERT INTO Comment VALUES
-                (NULL, :comment, 0, 0, NOW())
+                (NULL, :category, :comment, 0, 0, NOW(), :published)
         ");
 
         // Execute SQL query, bind parameter as we go.
         $sth->execute(array(
-            ':comment' => $this->comment
+            ':comment' => $this->comment,
+            ':category' => $this->category,
+            ':published' => $this->published
         ));
 
         // number of rows affected.
@@ -63,6 +70,7 @@ class Comment
     }
 
     // Returns an array of comments.
+    // TODO: add pagination for getting comments.
     function get_Comments(){
         // add connection credentials
         include("dbinfo.inc.php");
@@ -75,7 +83,7 @@ class Comment
         $sth = $pdo->prepare("
             SELECT * FROM Comment
                 ORDER BY submittime DESC
-                LIMIT 10
+                LIMIT 40
         ");
         // Comment class variables must reflect Table column names or a
         // proper array will not be returned.
