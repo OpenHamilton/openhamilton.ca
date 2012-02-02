@@ -15,7 +15,7 @@ $request_method = isset($_SERVER['REQUEST_METHOD'])
                     : '';
 ?>
 <head>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="stylefeedback.css" />
 </head>
 <div class="actual_space">
 <form method="post">
@@ -42,7 +42,8 @@ This is a(n):
 <?php
 // Check if postback
 if (strtoupper($request_method) == 'POST' &&
-        $message != "") {
+        $message != "") 
+{
     // This tests if the post is spam. (Courtesy of Sblam!)
     $spamrank = -2;//sblamtestpost(array('message', 'screen_name', NULL, NULL));
     if ($spamrank > -2)

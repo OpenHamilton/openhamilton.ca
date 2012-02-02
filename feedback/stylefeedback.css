@@ -1,20 +1,14 @@
 /* Feedback display CSS */
-.actual_space
-{
-    width: 530px;
-    height: 550px;
-    /* font-family: small-caption,arial sans-serif; */
-    font-size: 0.9em;
-}
-.actual_space span.label_tips
+
+span.label_tips
 {
     color: #666666;
 }
-.actual_space span.error
+span.error
 {
     color: #ff0000;
 }
-.actual_space input.styled_button
+input.styled_button
 {
     border: 1px solid #888888;
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -25,7 +19,7 @@
     background-color: #3366ff;
     color: #ffffff;
 }
-.actual_space input.styled_button:hover
+input.styled_button:hover
 {
     cursor: pointer;
     background-color: #4775ff;
@@ -68,11 +62,3 @@
 {
     color: #006600;    
 }
-
-/* for testing purpose delete after (represents comment section) */
-.fixed_box
-{
-    width: 500px;
-    height: 300px;
-}
-
