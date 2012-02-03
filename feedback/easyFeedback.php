@@ -19,7 +19,7 @@ define("HOUR", 60 * MINUTE);
 define("DAY", 24 * HOUR);
 define("MONTH", 30 * DAY);
 
-function submitAnonFeedback($sname, $msg, $cat, $spamrank)
+function submitAnonFeedback($sname, $msg, $cat, $spamrank, $errormessage = '')
 {
     switch ($cat) 
     {
@@ -44,7 +44,7 @@ function submitAnonFeedback($sname, $msg, $cat, $spamrank)
     // Display error message if user, used spaces in their name.
     if ($rval == -2) 
     {   
-        echo '<span class="error">*Only letters, numbers, and spaces can be in a name.</span><br />';
+        $errormessage .= '<br /><span class="error">*Only letters, numbers, and spaces can be in a name.</span><br />';
         return false;
     }
     else
@@ -91,15 +91,14 @@ function displayFeedback($fb)
     $screen_name = htmlentities($fb->screen_name, ENT_QUOTES, 'UTF-8');
     $message = strip_tags($fb->message, '<p><br>');
 
-    echo
-        '<div class="feedback">'.
-            '<p>'.$message.'</p><br />'.
+    return
+        '<li>'.
+            '<p>'.$message.'</p>'.
             '<span class="author">'.$screen_name.'</span>'.
                 '&nbsp;&nbsp;&nbsp;'.
                 '<span class="time">'.$time_string.'</span>'.
-                '<br />'.
-        '</div>'.
-        '<br />'."\n";
+        '</li>'.
+        "\n";
 }
 
 // Display time Facebook style

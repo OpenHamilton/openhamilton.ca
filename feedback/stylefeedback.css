@@ -1,5 +1,9 @@
 /* Feedback display CSS */
-
+hr.divider
+{
+    background-color: #4388CC;
+    height: 4px;
+}
 span.label_tips
 {
     color: #666666;
@@ -19,46 +23,50 @@ input.styled_button
     background-color: #3366ff;
     color: #ffffff;
 }
+.align_right
+{
+    float:right;
+}
 input.styled_button:hover
 {
     cursor: pointer;
     background-color: #4775ff;
 }
-#submit_options
+ul.feedback
 {
-    margin: 0px;
-    padding: 0px;
-    width: 50px;
-}
-.feedback_container
-{
-    width: 455px;
-    height: 100%;
+    background-color: #ffffff;
+    list-style:none;
+    border: 0px;
+    width: 97%;
+    height: 180px;
     overflow: auto;
-}
-.feedback
-{
-    background-color: #f7f7f7;
-    border: 1px solid #cccccc;
-    width: 400px;
-    padding: 10px;
+    padding: 5px;
     font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
     font-size: 11px;
     color: #333333;
 }
-.feedback:hover 
+ul.feedback li
+{
+    padding: 10px;
+    border: 1px solid #cccccc;
+    background-color: #f7f7f7;
+    margin-bottom: 5px;
+}
+ul.feedback li:hover 
 {
     background-color: #ffffff;
 }
-.feedback p
+ul.feedback li p
 {
-    margin: 0;
+    margin: 0 0 10px 0;
+    padding: 0;
+    line-height: 140%;
 }
-.feedback span.author
+ul.feedback li span.author
 {
     font-weight: bold;
 }
-.feedback span.time
+ul.feedback li span.time
 {
     color: #006600;    
 }

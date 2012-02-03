@@ -17,7 +17,6 @@ $request_method = isset($_SERVER['REQUEST_METHOD'])
 <head>
     <link rel="stylesheet" href="stylefeedback.css" />
 </head>
-<div class="actual_space">
 <form method="post">
 Name <span class="label_tips">(Optional)</span>:<br />
 <input type="text" title="You can enter your real name or an alias, like 'CoolGuy65'" 
@@ -85,8 +84,7 @@ if (strtoupper($request_method) == 'POST' &&
     </select>
     left by the citizens of Hamilton: <br /><br />
 </form>
-<div class="fixed_box">
-    <div class="feedback_container">
+<div class="feedback_container">
 <?php
 // Check if "Show me" button was clicked
 if (!empty($display_category))
@@ -111,6 +109,4 @@ else
     echo "Sorry, we couldn't get the latest feedback.";
 }
 ?>
-    </div>
-</div>
 </div>
