@@ -24,7 +24,7 @@ $dataPanels .= $builder->standardAnchorDivBlock(
 );
 $dataPanels .= $builder->standardAnchorDivBlock(
     "Dowsing",
-    "Find local simming spots in Hamilton.",
+    "Find local swimming spots in Hamilton.",
     "/Apps/Dowsing"
 );
 $dataPanels .= $builder->standardAnchorDivBlock(
